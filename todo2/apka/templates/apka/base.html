@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% load socialaccount %}
+<html lang ='uk'>
+<head>
+	<title>{%block title%} {%endblock%}</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="Author" content="Платонов Андрей" />
+    <link href="{% static 'css/base.css' %}" rel='stylesheet' type='text/css'>
+        {% block link %} {% endblock %}
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}"/>
+
+</head>
+
+<body>
+
+    <header >
+        <p>TODO</p>
+        {%block head%}{%endblock%}
+
+            {% if user.is_authenticated%}
+                <form  class="sing" method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                             <span id='logout' >Выход</span>
+
+                </form>
+            {% else %}
+                <span class="sing">Вход</span>
+            {%endif%}
+
+    </header>
+
+  {% block content%} {%endblock%}
+
+    <script src="{% static 'js/jquery_1_9_2.js' %}"></script><!-- я знаю про существование $(document).ready()-->
+    <script src="{% static 'js/main.js' %}"></script>
+    {%block script%}{%endblock%}
+</body>
+
+</html>
