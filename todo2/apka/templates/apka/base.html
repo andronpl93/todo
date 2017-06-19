@@ -17,7 +17,7 @@
 
     <header >
         <p>TODO</p>
-        {%block head%}{%endblock%}
+        <span id="archive" class="sing">Архив</span>
 
             {% if user.is_authenticated%}
                 <form  class="sing" method="post" action="{% url 'account_logout' %}">
@@ -32,7 +32,7 @@
 
     </header>
 
-  {% block content%} {%endblock%}
+    <div id="wrap">{% block content%} {%endblock%}</div>
 
     <script src="{% static 'js/jquery_1_9_2.js' %}"></script><!-- я знаю про существование $(document).ready()-->
     <script src="{% static 'js/main.js' %}"></script>

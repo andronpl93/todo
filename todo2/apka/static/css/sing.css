@@ -1,0 +1,54 @@
+section{
+    width: 50%;
+    padding: 5%;
+
+    position: absolute;
+    z-index:1;
+    bottom: 0;
+    top: 10%;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    font-size: 240%;
+    color: #fff;
+    text-align: justify;
+    background-color: #FEFEFE;
+    background-image: url('../img/back.jpg');
+    background-size: 100% 100%;
+
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+
+}
+section p{
+    margin-top:-10%;
+    text-shadow: 1px 0.5px 2px #000,
+                  1px 0.5px 5px rgba(0,0,0,0.6)  ;
+}
+section div{
+    display: flex;
+    margin-top:-15%;
+    justify-content: space-between;
+}
+
+a{
+    display: block;
+    width: 25%;
+
+    overflow: hidden;
+    border-radius: 100px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+    transition: all 0.3s ease;
+
+
+}
+a img{
+
+    width: 100%;
+    height: 101%;
+}
+a:hover{
+       box-shadow: 3px 3px  10px rgba(0,0,0,1);
+}
+
