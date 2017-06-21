@@ -1,0 +1,32 @@
+{% load staticfiles %}
+{%for l in Later%}
+    {%if forloop.first%}
+    <div class="tasks later">
+        <span>У Вас есть просроченные задания! Очень надеемся, что вы просто забыли их отметить </span>
+        <div class="icon" data-num="{{l.project.img}}"></div>
+    </div>
+    {%endif%}
+    <div class="tasks later">
+        <div class="priority {{l.prior}}"></div>
+        <span class="taskName">{{l.name}}</span>
+        <span class="projectName">{{l.project.name}}</span>
+        <div class="icon" data-num="{{l.project.img}}"></div>
+    </div>
+    <hr/>
+{% endfor%}
+{%for t in Tasks%}
+    <div class="tasks">
+        <div class="priority {{t.prior}}"></div>
+        <span class="taskName">{{t.name}}</span>
+        <span class="projectName">{{t.project.name}}</span>
+        <div class="icon" data-num="{{t.project.img}}"></div>
+        <div class="menu" ></div>
+    </div>
+    <hr/>
+{% empty %}
+    <p>На данный момент у Вас нет ни одного задания...</p>
+{% endfor%}
+<div class="add project">
+        <img src="{% static 'img/add.gif' %}"> <p>Добавить задание</p>
+</div>
+

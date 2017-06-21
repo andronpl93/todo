@@ -1,0 +1,35 @@
+{% extends "apka/base.html" %}
+{% load static %}
+
+{% block link %}
+    <link href="{% static 'css/todo.css' %}" rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content%}
+    <div  id='left' class="panel">
+        <header data-day="{{day}}">
+            <p>{{user.first_name}} {{user.last_name}}</p>
+
+            <p class="filter active" data-day="1">Сегодня <span>({{today}})</span></p>
+            <p class="filter" data-day="7">7 дней <span>({{seven}})</span></p>
+            <p class="filter" data-day="0">Все <span>({{all}})</span></p>
+
+
+        </header>
+        <p>Проекты:</p>
+        <div></div>
+        <p  class="add project"><img src="{% static 'img/add.gif' %}"> Добавить проект</p>
+    </div>
+
+    <div id="centr">
+
+    </div>
+
+
+
+{%endblock%}
+
+{%block script%}
+        <script src="{% static 'js/load_content.js' %}"></script>
+        <script src="{% static 'js/todo.js' %}"></script>
+{%endblock%}

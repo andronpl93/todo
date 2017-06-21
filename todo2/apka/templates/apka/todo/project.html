@@ -1,0 +1,7 @@
+{% load staticfiles %}
+{%for pr in projects%}
+    <div class="project">
+        <div class="icon" data-num="{{pr.img}}"></div>
+        <span>{{pr.name}}</span><span class="coun">{{pr.tasks_set.count}}</span>
+    </div>
+{% endfor%}

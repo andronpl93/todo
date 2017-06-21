@@ -1,0 +1,92 @@
+
+#centr{
+    background-color: #FEFEFE;
+    width: 45%;
+    height: 100vh;
+}
+.panel{
+
+    width: 20%;
+    height: 100vh;
+    padding: 0 4% 0;
+    margin-left: 10%;
+}
+.coun{
+    position: absolute;
+    right: -5%;
+    color: grey;
+}
+.project{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 30px;
+    padding: 1%;
+    margin-bottom: 8%;
+    transition: all 0.5s ease;
+
+}
+.project:hover,.panel > div> .active {
+    cursor: pointer;
+    margin-left: -10%;
+}
+.project:hover > .icon, .panel > div> .active >.icon {
+    background: url('../img/sprite_black2.gif');
+}
+
+.add img{
+    margin-right: 3%;
+    height: 100%;
+}
+.add{
+    color: #3D85C6;
+    margin-top: 15%;
+}
+
+.icon{
+    height: 100%;
+    margin-right: 3%;
+    background: url('../img/sprite_black.gif');
+
+}
+
+
+.panel > header{
+    font-size: 150%;
+    background: url('../img/back_header.jpg');
+    background-size: 100% 100%;
+    width: 105%;
+    padding: 5% 15%;
+    margin-left: -15%;
+
+    box-shadow: 2px 0px 10px #000;
+    color: white;
+        text-shadow: 1px 0.5px 2px #000,
+                  1px 0.5px 5px rgba(0,0,0,0.6)  ,
+                  3px 2px 10px rgba(0,0,0,0.3) ;
+}
+.panel > header p:first-child{
+    font-size: 120%;
+    margin-bottom: 10%;
+}
+
+.filter{
+    width: 120%;
+    padding:1% 5%;
+    margin-top: 5%;
+    margin-left: 30%;
+    background-color: rgba(120,180,210,0.8);
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    box-shadow: 1px 2px 10px black;
+}
+.filter:hover,.panel > header > .active{
+  margin-left: 20%;
+  cursor: pointer;
+  background-color: rgba(120,180,210,1);
+
+}
+.filter > span{
+    font-size: 80%;
+    opacity: 0.5;
+}
