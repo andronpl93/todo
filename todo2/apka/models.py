@@ -13,7 +13,7 @@ class Projects(models.Model):
 
 class  Tasks(models.Model):
     name = models.TextField('Краткое описание')
-    pab_date = models.DateTimeField('Время до которого нужно выполнить задачу')
+    pub_date = models.DateTimeField('Время до которого нужно выполнить задачу')
     status = models.BooleanField('Статус. Из одмена не использовать', default=False)
     prior = models.CharField('Приоритет',choices=(('a','Tall'),('b','Middle'),('c','Bottom')),max_length=1,blank=True,default='a')
     project = models.ForeignKey(Projects,on_delete=models.CASCADE)
@@ -22,6 +22,6 @@ class  Tasks(models.Model):
     class Meta:
         verbose_name = u'Задание'
         verbose_name_plural = u'Задания'
-        ordering=['prior']
+        ordering=['prior','-status']
 
 # Create your models here.

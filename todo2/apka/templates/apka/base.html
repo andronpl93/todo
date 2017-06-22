@@ -17,6 +17,10 @@
     <link href="{% static 'css/base.css' %}" rel='stylesheet' type='text/css'>
         {% block link %} {% endblock %}
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}"/>
+    <link href="{%static 'css/ui/jquery-ui.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/preloader.css' %}"  />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/datetime/timepicker-ui.css' %}"  />
+
 
 </head>
 
@@ -40,9 +44,31 @@
     </header>
 
     <div id="wrap">{% block content%} {%endblock%}</div>
+            <div id="preloader">
+            <div class="cssload-tetrominos">
+                    <div class="cssload-tetromino cssload-box1"></div>
+                    <div class="cssload-tetromino cssload-box2"></div>
+                    <div class="cssload-tetromino cssload-box3"></div>
+                    <div class="cssload-tetromino cssload-box4"></div>
+            </div>
+                </div>
+
+                <div id="add_task" >
+                    <input type="text" id="add_name" placeholder="Описание задания"/><br/>
+                    <input  id="add_datetime" placeholder="Время до выполнения"/><br/>
+                    <label>Приоритет: <label><input type="radio" name="priority" value='a'/> Высокий </label><label><input name="priority" type="radio" value='b'/> Средний </label><label><input name="priority" type="radio" value='c'/> Низкий</label></label><br/>
+                    <label>Проект: <select >
+                    {%for p in Projects%}
+                        <option value="{{p.id}}">{{p.name}}</option>
+                    {%endfor%}
+                    </select></label>
+                </div>
 
     <script src="{% static 'js/jquery_1_9_2.js' %}"></script><!-- я знаю про существование $(document).ready()-->
+    <script src="{% static 'js/datetime/timepicker-ui.js' %}"></script>
+    <script src="{% static 'js/ui/jquery-ui.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
     {%block script%}{%endblock%}
 </body>
 

@@ -3,6 +3,7 @@
 
 {% block link %}
     <link href="{% static 'css/todo.css' %}" rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/tasks.css' %}" rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content%}
@@ -10,20 +11,26 @@
         <header data-day="{{day}}">
             <p>{{user.first_name}} {{user.last_name}}</p>
 
-            <p class="filter active" data-day="1">Сегодня <span>({{today}})</span></p>
-            <p class="filter" data-day="7">7 дней <span>({{seven}})</span></p>
-            <p class="filter" data-day="0">Все <span>({{all}})</span></p>
+            <p class="filter active" data-day="1">Сегодня </p>
+            <p class="filter" data-day="7">7 дней </p>
+            <p class="filter" data-day="0">Все</p>
 
 
         </header>
         <p>Проекты:</p>
         <div></div>
-        <p  class="add project"><img src="{% static 'img/add.gif' %}"> Добавить проект</p>
+        <div class="add "><div><img src="{% static 'img/add.gif' %}">  <p>Добавить проект</p></div></div>
     </div>
 
     <div id="centr">
-
+        <div></div>
+        <div class="add">
+            <div>
+                <img src="{% static 'img/add.gif' %}"> <p>Добавить задание</p>
+            </div>
+        </div>
     </div>
+
 
 
 

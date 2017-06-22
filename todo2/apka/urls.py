@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^$', views.start),
     url(r'^shuban-projects/$', views.projects),
     url(r'^shuban-tasks/$', views.tasks),
+    url(r'^shuban-id/$', views.identificator),
 
 ]

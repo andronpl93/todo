@@ -12,42 +12,48 @@ day=1
 @log                            # я знаю про существование login_required, просто захотел сделать свой декоратор
 def start(request):
 
-    filt={'day':day}
-    tasks=Tasks.objects.filter(status=False).filter(pab_date__gt=datetime.now())   # Статус false означает что задание еще не выполненно
+    filt={'day':day,'Projects':Projects.objects.all()}
+    tasks=Tasks.objects.filter(status=False).filter(pub_date__gt=datetime.now())   # Статус false означает что задание еще не выполненно
     a=datetime.now()
-    filt['today']=len(tasks.filter(pab_date__lt=datetime.date(a+timedelta(days=1))))
-    filt['seven']=len(tasks.filter(pab_date__lt=datetime.date(a+timedelta(days=7))))
-    filt['all']=len(tasks)
 
     return render(request,'apka/todo.html',filt)
 
-@log
+
 def projects(request):
     return render(request, 'apka/todo/project.html',{'projects':Projects.objects.all()})
 
-@log
+
 def tasks(request):
 
     id_project=request.POST.get('id_projects') or None
     if request.POST.get('day'):
         global day
-        day=request.POST.get('day')
-
-    tasks=Tasks.objects.filter(status=False)    # Статус false означает что задание еще не выполненно
-
-                                                 # Сортировка находится в ordering
-    later=tasks.filter(pab_date__lt=datetime.now())   #Просроченные задания
-
-    tasks = tasks.filter(pab_date__gt=datetime.now())         #не просроченные задания
-    if not day:                                                                   #  если day не 0, знач есть фильтр по дням
-        tasks = tasks.filter(pab_date__lt=datetime.date(a + timedelta(days=day)))
+        day=int(request.POST.get('day'))
 
     if id_project is not None:                                                     # Выборка по конкретному проекту, если он есть
-        tasks=tasks.filter(project=id_project)
+        tasks=Tasks.objects.filter(project=id_project)
+    else:
+        tasks = Tasks.objects.filter(status=False)  # Статус false означает что задание еще не выполненно
 
-
+                                         # Сортировка находится в ordering
+    later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
+    tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
+    if day:                                                                   #  если day не 0, знач есть фильтр по дням
+        tasks = tasks.filter(pub_date__lt=datetime.date(datetime.now()+timedelta(days=day)))
 
     return render(request, 'apka/todo/tasks.html', {'Later':later,'Tasks':tasks})
+
+@log
+def identificator(request):
+    id_tasks = request.POST.get('id')
+    sta = request.POST.get('status')
+    sta = sta!='True' and True or False
+    t=Tasks.objects.get(id=int(id_tasks))   # исключение обрабатывать не буду
+    t.status=sta
+    t.save()
+    return HttpResponse(sta)
+
+
 
 logging.basicConfig(
 	level = logging.DEBUG,
