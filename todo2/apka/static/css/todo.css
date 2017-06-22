@@ -16,14 +16,18 @@
     right: -3%;
     color: grey;
 }
-.project,.add> div{
+.project,.add> div:last-child{
     display: flex;
     align-items: center;
     position: relative;
-    height: 30px;
+
     padding: 1%;
     margin-bottom: 8%;
     cursor: pointer;
+
+}
+.project{
+    height: 30px;
 }
 .project.active {
     color:#2A7FAA;
@@ -37,12 +41,14 @@
 }
 
 .add>div img{
+
     margin-right: 3%;
     height: 100%;
 }
-.add>div{
+.add>div:last-child{
+     height: 30px;
     color: #3D85C6;
-    margin-top: 15%;
+    margin-top: 1%;
        cursor: pointer;
 }
 
@@ -105,7 +111,7 @@
     right: -20%;
 }
 
-.project,.add,.filter{
+.project,.add,.add>div,.filter{
     transition: all 0.5s ease;
 }
 .name{
@@ -115,4 +121,52 @@
 .projectName{
     margin-left: 1%;
 }
+#add_project{
+    width: 100%;
+    display: none;
 
+}
+
+#add_project > div{
+    width:100%;
+    display: flex;
+    align-items:center;
+    margin-bottom:2%;
+}
+#add_project .icon{
+    height: 40px;
+    margin-right: 2%;
+    background: url('../img/sprite_black.gif');
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+    animation: shad2 3s infinite ease-in-out;
+    border-radius:5px;
+    cursor: pointer;
+}
+#add_project span{
+    width: 30%;
+    margin-left:20%;
+    cursor: pointer;
+    font-size:120%;
+}
+
+#add_project span:last-child{
+    color: grey;
+}
+#add_project textarea{
+    background:rgba(255,255,2550,.9);
+    width:100%;
+    border: none;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+    animation: shad1 3s infinite ease-in-out;
+}
+
+@keyframes shad1 {
+  0% {box-shadow: 1px 2px 5px rgba(0,0,0,0.5);}
+  50%{box-shadow: 1px 2px 5px rgba(0,0,0,0);}
+  100%{box-shadow: 1px 2px 5px rgba(0,0,0,0.5);}
+}
+@keyframes shad2 {
+  0% {box-shadow: 1px 2px 5px rgba(0,0,0,0);}
+  50%{box-shadow: 3px 6px 10px rgba(0,0,0,0.6);}
+  100%{box-shadow: 1px 2px 5px rgba(0,0,0,0);}
+}

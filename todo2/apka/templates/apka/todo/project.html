@@ -2,8 +2,7 @@
 {%for pr in projects%}
     <div class="project" data-id="{{pr.id}}">
             <div class="icon" data-num="{{pr.img}}"></div>
-            <span class="name">{{pr.name}}</span><span class="coun">{{pr.tasks_set.count}}</span>
-
-        <div class="menu" ></div>
+            <span class="name">{{pr.name}}</span><span class="coun">{{pr.taskCount}}</span>
+        <div class="menu"  ></div>
     </div>
 {% endfor%}

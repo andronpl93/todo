@@ -19,7 +19,18 @@
         </header>
         <p>Проекты:</p>
         <div></div>
-        <div class="add "><div><img src="{% static 'img/add.gif' %}">  <p>Добавить проект</p></div></div>
+        <div class="add">
+            <div>
+                <img src="{% static 'img/add.gif' %}">  <p>Добавить проект</p>
+            </div>
+        </div>
+        <div id="add_project" data-id>
+             <div>
+                 <div class="icon" data-num="1"></div>
+                 <textarea id="add_name_pr" placeholder="Название проекта"></textarea><br/>
+             </div>
+            <span class="end"> Готово</span> <span class="esc">Отмена</span>
+         </div>
     </div>
 
     <div id="centr">
@@ -38,5 +49,5 @@
 
 {%block script%}
         <script src="{% static 'js/load_content.js' %}"></script>
-        <script src="{% static 'js/todo.js' %}"></script>
+        <script src="{% static 'js/slide.js' %}"></script>
 {%endblock%}

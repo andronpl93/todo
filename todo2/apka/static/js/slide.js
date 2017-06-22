@@ -1,6 +1,5 @@
 $('#centr').on('click','.check',function(){
     var self=$(this);
-
     var obj={
         type:'POST',
 		timeout:5000,
@@ -13,12 +12,9 @@ $('#centr').on('click','.check',function(){
 		    a=data=="True" && 'line-through' || 'None';
 		    $('.taskName',self.parents('.tasks')).css('text-decoration',a);
 		    loader.fadeOut(200);
-
+		    load_projects();
 		},
-
     };
     $.ajax(obj);
-
-
-
 });
+

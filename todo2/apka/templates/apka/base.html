@@ -53,23 +53,32 @@
             </div>
                 </div>
 
-                <div id="add_task" >
-                    <input type="text" id="add_name" placeholder="Описание задания"/><br/>
-                    <input  id="add_datetime" placeholder="Время до выполнения"/><br/>
+                <div id="add_task" data-id>
+
                     <label>Приоритет: <label><input type="radio" name="priority" value='a'/> Высокий </label><label><input name="priority" type="radio" value='b'/> Средний </label><label><input name="priority" type="radio" value='c'/> Низкий</label></label><br/>
                     <label>Проект: <select >
                     {%for p in Projects%}
                         <option value="{{p.id}}">{{p.name}}</option>
                     {%endfor%}
                     </select></label>
+                    <textarea id="add_name" placeholder="Описание задания"></textarea><br/>
+                    <input  id="add_datetime" placeholder="Время до выполнения"/><br/>
+                     <span class="esc">Отмена</span><span class="end"> Готово</span>
                 </div>
 
+
+    <div id='error_box' style='display: none;color:black; background: rgba(132,182,222,0.95); position: fixed;z-index:100; width: 40%; left:36%; top: 40%; -webkit-box-shadow: 2px 5px 5px 3px rgba(0, 0, 0, 0.7); box-shadow: 3px 5px 15px 3px rgba(0, 0, 0, 0.7); -webkit-border-radius: 5px; border-radius: 5px; text-align: center;'>
+
+            <p id='error_message' style='color: #FFF;font-size: 200%; margin-top: 18px; font-weight: bold;  text-shadow: 1px 1px 1px #000; filter: dropshadow(color=#FFFFFF, offx=1, offy=1);'></p>
+    </div>
     <script src="{% static 'js/jquery_1_9_2.js' %}"></script><!-- я знаю про существование $(document).ready()-->
     <script src="{% static 'js/datetime/timepicker-ui.js' %}"></script>
     <script src="{% static 'js/ui/jquery-ui.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-
     {%block script%}{%endblock%}
+    <script src="{% static 'js/edit_add.js' %}"></script>
+
+
 </body>
 
 </html>

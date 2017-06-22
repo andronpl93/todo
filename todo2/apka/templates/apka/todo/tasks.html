@@ -5,14 +5,19 @@
         <span>У Вас есть просроченные задания! Очень надеемся, что вы просто забыли их отметить </span>
 
     {%endif%}
-    <div class="tasks later" data-id="{{l.id}}">
+    <div class="tasks later " data-id="{{l.id}}">
         <header>
-            <div class="priority {{l.prior}}"></div>
-            <span>{{l.pub_date|date:"G:i j.n.Y"}} </span>
+            <div class="priority" data-prior="{{l.prior}}"></div>
+            <span date-datime="0">{{l.pub_date|date:"Y-m-j G:i"}} </span>
             <div class="icon" data-num="{{l.project.img}}"></div>
-            <span class="projectName"> {{l.project.name}}</span>
-            <div class="check" data-status='{{l.status}}' ></div>
-            <div class="menu" ></div>
+            <span class="projectName" data-proj="{{l.project.id}}"> {{l.project.name}}</span>
+            <div class="check rss" data-status='{{l.status}}' >
+
+                 <label for="buttonThree"> <!-- class="attention" -->
+                    <i></i>
+                </label>
+            </div>
+            <div class="menu"  ><span>Изменить</span><span>Удалить</span><span>Отмена</span></div>
         </header>
         <span class="taskName">{{l.name}}</span>
 
@@ -22,12 +27,16 @@
 {%for t in Tasks%}
     <div class="tasks" data-id="{{t.id}}">
         <header>
-            <div class="priority {{t.prior}}"></div>
-            <span>{{t.pub_date|date:"G:i j.n.Y"}} </span>
+            <div class="priority " data-prior="{{t.prior}}"></div>
+            <span date-datime="0">{{t.pub_date|date:"Y-m-j G:i"}}</span>
             <div class="icon" data-num="{{t.project.img}}"></div>
-            <span class="projectName"> {{t.project.name}}</span>
-            <div class="check" data-status='{{t.status}}' ></div>
-            <div class="menu"  ></div>
+            <span class="projectName" data-proj="{{t.project.id}}"> {{t.project.name}}</span>
+            <div class="check rss" data-status='{{t.status}}' >
+                 <label for="buttonThree">
+                    <i></i>
+                </label>
+            </div>
+            <div class="menu"  ><span>Изменить</span><span>Удалить</span><span>Отмена</span></div>
         </header>
         <span class="taskName">{{t.name}}</span>
     </div>

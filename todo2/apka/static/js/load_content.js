@@ -1,38 +1,61 @@
 var loader=$('#preloader');
 loader.fadeOut();
+
+load_content();
+load_projects();
+icone('#add_project');
+$('.filter').bind('click',function(){ //:not(.active) почему-то не обновляется
+    $('.project.active').removeClass('active');
+    if($(this).hasClass('active'))
+    {
+        $(this).removeClass('active');
+        $('.filter[data-day=1]').addClass('active');
+    }
+    else
+    {
+         $('.filter.active').removeClass('active');
+         $(this).addClass('active');
+    }
+    get_content();
+
+});
+
+$('.panel> div').on('click','.project',function(e){
+    e.stopPropagation();
+    $('.filter.active').removeClass('active');
+
+    if(event.target.className=='menu')          //раскошные костыли
+        return 0
+    a=$('.project.active');
+    $(this).toggleClass('active');
+    a.removeClass('active');
+
+    if(!$('.project.active').length){
+        $('.filter[data-day=1]').addClass('active');
+    }
+
+    get_content();
+
+});
+function load_projects(){
 $.get( "shuban-projects/", function( data ) {
         $('#left > div:first').html(data);
         icone('.project');
 
 });
 
-$.get( "shuban-tasks/", function( data ) {
+};
+
+function load_content(){
+    $.get( "shuban-tasks/", function( data ) {
         $('#centr>div:first').html(data);
-        $('#add_task').prependTo('#centr .add');
         icone('.tasks');
 
 });
 
-$('.filter').bind('click',function(){ //:not(.active) почему-то не обновляется
-    if($(this).hasClass('active'))
-        return 0
-    $('.filter.active').removeClass('active');
-    $(this).addClass('active');
-    get_content();
-
-});
-
-$('.panel> div').on('click','.project',function(e){
-    if(event.target.className=='menu')          //раскошные костыли
-        return 0
-    a=$('.project.active');
-    $(this).toggleClass('active');
-    a.removeClass('active');
-    get_content();
-});
 
 
-
+};
 
 
 function get_content(){
@@ -63,6 +86,7 @@ function icone(context){
             numIcon=$(this).attr('data-num');
             $(this).css({
                 'min-width': sizeIcon+'px',
+                'max-width': sizeIcon+'px',
                 'background-size':  sizeIcon*6+'px '+sizeIcon*3+'px',
                 'background-position': -(Math.floor((numIcon)%6)*sizeIcon)+'px '+(-Math.floor(numIcon/6)*sizeIcon)+'px',
             });

@@ -22,6 +22,6 @@ class  Tasks(models.Model):
     class Meta:
         verbose_name = u'Задание'
         verbose_name_plural = u'Задания'
-        ordering=['prior','-status']
+        ordering=['prior','pub_date','-status']
 
 # Create your models here.

@@ -9,5 +9,8 @@ urlpatterns = [
     url(r'^shuban-projects/$', views.projects),
     url(r'^shuban-tasks/$', views.tasks),
     url(r'^shuban-id/$', views.identificator),
+    url(r'^shuban-add/$', views.add_edit),
+    url(r'^shuban-add_pr/$', views.add_pr),
+    url(r'^shuban-del-task/$', views.del_task),
 
 ]
