@@ -12,13 +12,13 @@ $('#centr .add div').click({'sel':'#add_task'},hideBottom);   // для зада
 $('#left .add div').click({'sel':'#add_project'},hideBottom);   // для прокта
 
 ////Кнопка Готово
-$('#add_task  .end').click({'url':'shuban-add/','func':add_form,'cont':'.task','fF':fadeForm},end);
-$('#add_project  .end').click({'url':'shuban-add_pr/','func':add_form_pr,'cont':'.project','fF':fadeForm_pr},end);
+$('#add_task  .end').click({'url':'shuban-add/','func':add_form,'cont':'.task','fF':fadeForm,'text': 'Задание успешно ','add':'добавленно','edit':'измененно'},end);
+$('#add_project  .end').click({'url':'shuban-add_pr/','func':add_form_pr,'cont':'.project','fF':fadeForm_pr,'text': 'Проект успешно ','add':'добавлен','edit':'изменен'},end);
 
 
 /// Кнопка Отмена
 $('#add_task  .esc').click({'fF':fadeForm,'cont':'.tasks'},esc);
-$('#add_project  .esc').click({'fF':fadeForm_pr,'cont':'.projects'},esc);
+$('#add_project  .esc').click({'fF':fadeForm_pr,'cont':'.project'},esc);
 
 
  ///        выкатывает меню в шапке записи
@@ -27,7 +27,8 @@ $('#left').on('click','.menu',{'fF':fadeForm_pr,'contId':'#add_project'},men);
 
 ////  закатывает меню обратно
 $('#centr').on('click','.menu > span:last-child',{'fF':fadeForm,'contId':'#add_task','cont':'.tasks'},menu_esc);
-//$('#centr').on('click','.menu > span:last-child',);
+$('#left').on('click','.menu > span:last-child',{'fF':fadeForm_pr,'contId':'#add_project','cont':'.project'},menu_esc);
+
 
 $('#centr').on('click','.menu > span:first-child',function(e){  // Кнопка "изменить запись". Подтягивает форму для изменения. Отправлять форму будет кнопка на самой форме
         e.stopPropagation();
@@ -46,6 +47,20 @@ $('#centr').on('click','.menu > span:first-child',function(e){  // Кнопка 
 
 
 });
+$('#left').on('click','.menu > span:first-child',function(e){  // Кнопка "изменить запись". Подтягивает форму для изменения. Отправлять форму будет кнопка на самой форме
+        e.stopPropagation();
+        var form=$('#add_project');
+        $(this).parents('.project').append(form);
+        form.show();
+        $('>div:first-child',$(this).parents('.project')).css('visibility','hidden');
+        $('.icon',form).attr('data-num',$('.icon',$(this).parents('.project')).attr('data-num'));
+        form.attr('data-id',$(this).parents('.project').attr('data-id'));
+        icone('.project');
+        $('#add_name_pr').val( $('.name',$(this).parents('.project')).text());
+
+
+
+});
 
 $('#centr').on('click','.menu > span:nth-child(2)',function(e){
          e.stopPropagation();
@@ -53,8 +68,25 @@ $('#centr').on('click','.menu > span:nth-child(2)',function(e){
          obj.url='shuban-del-task/';
          obj.data={'id_task':self.parents('.tasks').attr('data-id')};
          obj.success=function(){
-             massage('Запись успешно удалена',1500);
+             massage('Задание успешно удаленно',1000);
              load_content();
+        };
+        $.ajax(obj);
+});
+$('#left').on('click','.menu > span:nth-child(2)',function(e){
+         e.stopPropagation();
+         var self=$(this);
+         obj.url='shuban-del-pr/';
+         obj.data={'id_pr':self.parents('.project').attr('data-id')};
+         obj.success=function(e){
+            if(e=='1'){
+                massage('Проект успешно удален',1500);
+                load_content();
+                load_projects();
+            }else{
+                massage('Невозможно удалить проект у которого есть незавершенные задачи',3500);
+            }
+
         };
         $.ajax(obj);
 });
@@ -66,13 +98,15 @@ function fadeForm(self){
     $('.taskName',self.parents('.tasks')).show();
     $('#add_task').appendTo('body');
 };
+
 function fadeForm_pr(self){
     $('#add_name_pr').val('');$('#add_project .icon').attr('data-num','1');
     self.parents('#add_project').fadeOut(100);
     $('div:last-child',self.parents('.add')).fadeIn(100);
-    $('.project .name',self.parents('.projects')).show();
+    $('>div:first-child',self.parents('.project')).css('visibility','visible');
     $('#add_project').appendTo('body');
 };
+
 function add_form(){
     obj.data={}
     obj.data.priority=$('input[name=priority]:checked').val();
@@ -80,9 +114,6 @@ function add_form(){
     obj.data.name=$('#add_name').val();
     obj.data.pub_date=$('#add_datetime').val();
 
-    if($('#add_task').attr('data-id')){
-                obj.data.id_tasks=$('#add_task').attr('data-id');
-    }
 
     for(var key in obj.data){
         if (!obj.data[key]){
@@ -90,18 +121,27 @@ function add_form(){
             return 0;
         }
     }
-    return 1;
+    if($('#add_task').attr('data-id')){
+                obj.data.id_tasks=$('#add_task').attr('data-id');
+                return 2;// выведет запись успешно "измененна"
+    }
+    return 1; // выведет запись успешно Добавленна
 
 }
 function add_form_pr(){
     obj.data={}
     obj.data.name=$('#add_name_pr').val();
     obj.data.img=$('#add_project .icon').attr('data-num');
+
     if (!obj.data.name){
             massage('Введите название',1000);
             return 0;
     }
-    return 1;
+    if($('#add_project').attr('data-id')){
+                obj.data.id_project=$('#add_project').attr('data-id');
+                return 2;   // выведет запись успешно "измененна"
+    }
+    return 1;  // выведет запись успешно Добавленна
 };
 function massage(str,time){
     time=time || 2000;
@@ -111,6 +151,7 @@ function massage(str,time){
 };
 
 function hideBottom(e){
+    e.stopPropagation();
     var self=$(this).parent('.add');
     $('div:last-child',self).fadeOut(function(){
         $(e.data.sel).prependTo(self).fadeIn(300);
@@ -118,15 +159,20 @@ function hideBottom(e){
 
 };
 function end (e){///   кнопка "Готово" на форме добавления-изменения
+    e.stopPropagation();
     self=$(this);
-    if (!e.data.func())    // заполняет data хламом из формы
+    if (e.data.func()==0)    // заполняет data хламом из формы
         return 0
+    else if (e.data.func()==1)
+            e.data.text+=e.data.add
+        else
+            e.data.text+=e.data.edit
     obj.url=e.data.url;
     obj.success=function(){
         load_content();    //грyзит контент в цетр
         icone(e.data.cont);
         e.data.fF(self);   // прячет форму добавления\изменения и возвращает кнопку "добавить"
-        massage('Запись успешно добавлена',1000);
+        massage(e.data.text,1000);
         load_projects();
     };
     $.ajax(obj);
@@ -134,11 +180,12 @@ function end (e){///   кнопка "Готово" на форме добавл�
 
 function esc(e){//// прячет форму
      e.stopPropagation();
-    e.data.fF($(this));
-    $('.menu',$(this).parents(e.data.cont)).removeClass('menu_act');
+     e.data.fF($(this));
+     $('.menu.menu_act').removeClass('menu_act');
 }
 
 function men(e){
+
     e.stopPropagation();
     $('.menu.menu_act').removeClass('menu_act');
     e.data.fF($(e.data.contId+' .esc'));

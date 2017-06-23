@@ -3,7 +3,9 @@ loader.fadeOut();
 
 load_content();
 load_projects();
+
 icone('#add_project');
+
 $('.filter').bind('click',function(){ //:not(.active) почему-то не обновляется
     $('.project.active').removeClass('active');
     if($(this).hasClass('active'))
@@ -20,7 +22,7 @@ $('.filter').bind('click',function(){ //:not(.active) почему-то не о�
 
 });
 
-$('.panel> div').on('click','.project',function(e){
+$('.panel> div').on('click','.project>div:first-child',function(e){
     e.stopPropagation();
     $('.filter.active').removeClass('active');
 

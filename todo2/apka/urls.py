@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^shuban-add/$', views.add_edit),
     url(r'^shuban-add_pr/$', views.add_pr),
     url(r'^shuban-del-task/$', views.del_task),
+    url(r'^shuban-del-pr/$', views.del_pr),
 
 ]

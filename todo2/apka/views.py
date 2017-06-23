@@ -88,13 +88,23 @@ def del_task(request):
 @log
 def add_pr(request):
     a=request.POST.get
-    if a('id_projects'):
-        p=Projects.objects.get(id=int(a('id_projects')), project__auth=request.user)
+    logging.debug(a('id_project'))
+    if a('id_project'):
+        p=Projects.objects.get(id=int(a('id_project')), auth=request.user)
         p.name=a('name')
         p.img=a('img')
+        logging.debug('111111')
     else:
         p=Projects(name=a('name'),img=a('img'),auth=request.user)
     p.save()
+    return HttpResponse('1')
+
+@log
+def del_pr(request):
+    p=Projects.objects.get(id=int(request.POST.get('id_pr')),auth=request.user);
+    if p.tasks_set.filter(status=False).count():
+        return HttpResponse('0')
+    p.delete()
     return HttpResponse('1')
 
 logging.basicConfig(

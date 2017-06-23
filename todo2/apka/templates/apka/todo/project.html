@@ -1,8 +1,8 @@
 {% load staticfiles %}
 {%for pr in projects%}
     <div class="project" data-id="{{pr.id}}">
-            <div class="icon" data-num="{{pr.img}}"></div>
-            <span class="name">{{pr.name}}</span><span class="coun">{{pr.taskCount}}</span>
-        <div class="menu"  ></div>
+            <div ><div class="icon" data-num="{{pr.img}}"></div>
+            <span class="name">{{pr.name}}</span><span class="coun">{{pr.taskCount}}</span></div>
+        <div class="menu" ><span>Изменить</span><span>Удалить</span><span>Отмена</span></div>
     </div>
 {% endfor%}

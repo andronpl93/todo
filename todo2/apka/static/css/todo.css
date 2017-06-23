@@ -16,25 +16,27 @@
     right: -3%;
     color: grey;
 }
-.project,.add> div:last-child{
+.project > div:first-child,.add> div:last-child{
     display: flex;
     align-items: center;
     position: relative;
 
-    padding: 1%;
-    margin-bottom: 8%;
+    height: 30px;
     cursor: pointer;
 
 }
 .project{
-    height: 30px;
+
+    padding: 2%;
+    margin-bottom: 4%;
+        position: relative;
 }
 .project.active {
     color:#2A7FAA;
     font-size: 110%;
 
 }
-.project:hover > .icon, .panel > div> .active >.icon {
+.project> div:first-child:hover .icon,.project.active .icon,.panel > div> .active >.icon {
     background: url('../img/sprite_black2.gif');
     margin-left: -10%;
 
@@ -48,7 +50,7 @@
 .add>div:last-child{
      height: 30px;
     color: #3D85C6;
-    margin-top: 1%;
+    margin-top: 5%;
        cursor: pointer;
 }
 
@@ -102,14 +104,37 @@
 }
 
 .project .menu{
-    height: 90%;
+    height: 40px;
     width: 10%;
     background: url('../img/menu.gif');
     background-size: auto 100%;
     background-repeat: no-repeat;
     position: absolute;
     right: -20%;
+    top:0;
+    display:flex;
+    align-items:center;
+    justify-content: space-around;
+    transition:all 0.5s ease;
+    cursor: pointer;
+
 }
+.project .menu span{
+    display:  none;
+    cursor: pointer;
+}
+.project .menu_act span{
+    display:  inline;
+}
+.project .menu_act{
+    top:0;
+
+    width:115%;
+    background: rgba(0,0,0,0.7);
+    right:-13%;
+    cursor:default;
+}
+
 
 .project,.add,.add>div,.filter{
     transition: all 0.5s ease;
@@ -124,6 +149,7 @@
 #add_project{
     width: 100%;
     display: none;
+    margin-top: 5%;
 
 }
 
@@ -134,7 +160,7 @@
     margin-bottom:2%;
 }
 #add_project .icon{
-    height: 40px;
+    height: 30px;
     margin-right: 2%;
     background: url('../img/sprite_black.gif');
     box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
