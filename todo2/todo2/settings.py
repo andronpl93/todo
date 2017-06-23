@@ -58,7 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'apka.urls'
+ROOT_URLCONF = 'todo2.urls'
 
 TEMPLATES = [
     {

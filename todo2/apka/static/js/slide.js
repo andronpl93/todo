@@ -13,6 +13,7 @@ $('#centr').on('click','.check',function(){
 		    $('.taskName',self.parents('.tasks')).css('text-decoration',a);
 		    loader.fadeOut(200);
 		    load_projects();
+		    load_content();
 		},
     };
     $.ajax(obj);

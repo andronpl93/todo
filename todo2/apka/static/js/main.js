@@ -13,3 +13,8 @@ for(var i=0;i<18;i++){
     text+='<div class="shadow"></div>';
 }
 $('#icon_panel').html(text);
+
+if (String(window.location.href).includes('archive')){
+     $('#archive').addClass('active');
+}
+

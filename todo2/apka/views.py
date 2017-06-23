@@ -11,7 +11,7 @@ from django.core import serializers
 day=1
 
 @log                            # я знаю про существование login_required, просто захотел сделать свой декоратор
-def start(request):
+def start(request,archive=False):
     global day
     day=1
     filt={'day':day,'Projects':Projects.objects.filter(auth=request.user)}
@@ -19,24 +19,24 @@ def start(request):
     return render(request,'apka/todo.html',filt)
 
 
-def projects(request):
+def projects(request,archive=False):
     pr=[]
     for i in Projects.objects.filter(auth=request.user):
         pr.append({})
         pr[-1]['id']=i.id
         pr[-1]['img']=i.img
         pr[-1]['name']=i.name
-        pr[-1]['taskCount']=i.tasks_set.filter(status=False).count()  #не делать p.tasks_set.count в шаблоне,так как нужен этот фильтр
+        pr[-1]['taskCount']=i.tasks_set.filter(status=archive).count()  #не делать p.tasks_set.count в шаблоне,так как нужен этот фильтр
     return render(request, 'apka/todo/project.html',{'projects':pr})
 
 
-def tasks(request):
+def tasks(request,archive=False):
     id_project=request.POST.get('id_projects') or None
     if request.POST.get('day'):
         global day
         day=int(request.POST.get('day'))
     logging.debug('-1')
-    tasks = Tasks.objects.filter(project__auth=request.user).filter(status=False)  # Статус false означает что задание еще не выполненно
+    tasks = Tasks.objects.filter(project__auth=request.user).filter(status=archive)  # Статус false означает что задание еще не выполненно
 
     f=tasks.filter(pub_date__gt=datetime.now())
 
@@ -58,7 +58,7 @@ def tasks(request):
     return render(request, 'apka/todo/tasks.html', {'Later':later,'Tasks':tasks,'filt':filt})
 
 @log
-def identificator(request):
+def identificator(request,archive=False):
     id_tasks = request.POST.get('id')
     sta = request.POST.get('status')
     sta = sta!='True' and True or False
@@ -67,7 +67,7 @@ def identificator(request):
     t.save()
     return HttpResponse(sta)
 @log
-def add_edit(request):
+def add_edit(request,archive=False):
     a=request.POST.get
     p=Projects.objects.get(id=int(a('project')),auth=request.user)
     dt=datetime.strptime(a('pub_date')+' ','%Y-%m-%d %H:%M ')
@@ -83,14 +83,14 @@ def add_edit(request):
     return HttpResponse('1')
 
 @log
-def del_task(request):
+def del_task(request,archive=False):
 
     t=Tasks.objects.get(id=int(request.POST.get('id_task')), project__auth=request.user).delete();
     return HttpResponse('1')
 
 
 @log
-def add_pr(request):
+def add_pr(request,archive=False):
     a=request.POST.get
     logging.debug(a('id_project'))
     if a('id_project'):
@@ -104,7 +104,7 @@ def add_pr(request):
     return HttpResponse('1')
 
 @log
-def del_pr(request):
+def del_pr(request,archive=False):
     p=Projects.objects.get(id=int(request.POST.get('id_pr')),auth=request.user);
     if p.tasks_set.filter(status=False).count():
         return HttpResponse('0')
@@ -112,7 +112,7 @@ def del_pr(request):
     return HttpResponse('1')
 
 
-def upd_select(request):
+def upd_select(request,archive=False):
     p=Projects.objects.filter(auth=request.user)
     return HttpResponse(serializers.serialize('json', list(p), fields=('name','id')))
 

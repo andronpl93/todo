@@ -43,7 +43,8 @@ function load_projects(){
 $.get( "shuban-projects/", function( data ) {
         $('#left > div:first').html(data);
         icone('.project');
-        $('.filter[data-day=1]').addClass('active');
+        if (!$('.filter.active').length)
+            $('.filter[data-day=1]').addClass('active');
 });
 
 };

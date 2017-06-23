@@ -18,7 +18,10 @@ body > header{
     box-shadow: 0px 0px 15px #000;
     border-radius: 0px 0 0 100px ;
 }
-
+a{
+    text-decoration: none;
+    color:#CFFCFF;
+}
 body > header p{
     font-size: 300%;
     margin-left: 5%;
@@ -56,7 +59,7 @@ body > header p{
     opacity: 0.6;
     transition: all 0.5s ease;
 }
-#archive:hover{
+#archive:hover,#archive.active{
         opacity: 1;
 }
 

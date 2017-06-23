@@ -27,8 +27,8 @@
 <body>
 
     <header >
-        <p>TODO</p>
-        <span id="archive" class="sing">Архив</span>
+        <p><a href="/">TODO</a></p>
+        <span id="archive" class="sing"><a href="/archive">Архив</a></span>
 
             {% if user.is_authenticated%}
                 <form  class="sing" method="post" action="{% url 'account_logout' %}">
