@@ -11,9 +11,9 @@
         <header data-day="{{day}}">
             <p>{{user.first_name}} {{user.last_name}}</p>
 
-            <p class="filter active" data-day="1">Сегодня </p>
-            <p class="filter" data-day="7">7 дней </p>
-            <p class="filter" data-day="0">Все</p>
+            <p class="filter active" data-day="1">Сегодня<span></span> </p>
+            <p class="filter" data-day="7">7 дней <span></span></p>
+            <p class="filter" data-day="0">Все<span></span></p>
 
 
         </header>
@@ -26,7 +26,7 @@
         </div>
         <div id="add_project" data-id>
              <div>
-                 <div class="icon" data-num="1"></div>
+                 <div class="icon" data-num="1"><div id="icon_panel"></div></div>
                  <textarea id="add_name_pr" placeholder="Название проекта"></textarea><br/>
              </div>
             <span class="end"> Готово</span> <span class="esc">Отмена</span>

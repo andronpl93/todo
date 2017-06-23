@@ -29,7 +29,7 @@ $('.panel> div').on('click','.project>div:first-child',function(e){
     if(event.target.className=='menu')          //раскошные костыли
         return 0
     a=$('.project.active');
-    $(this).toggleClass('active');
+    $(this).parents('.project').toggleClass('active');
     a.removeClass('active');
 
     if(!$('.project.active').length){
@@ -43,7 +43,7 @@ function load_projects(){
 $.get( "shuban-projects/", function( data ) {
         $('#left > div:first').html(data);
         icone('.project');
-
+        $('.filter[data-day=1]').addClass('active');
 });
 
 };
@@ -52,7 +52,9 @@ function load_content(){
     $.get( "shuban-tasks/", function( data ) {
         $('#centr>div:first').html(data);
         icone('.tasks');
-
+        $('.filter[data-day=1] > span').text($('#update_filter').attr('data-today'));
+        $('.filter[data-day=7] > span').text($('#update_filter').attr('data-seven'));
+        $('.filter[data-day=0] > span').text($('#update_filter').attr('data-all'));
 });
 
 

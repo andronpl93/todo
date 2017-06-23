@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from .models import Projects,Tasks
 from .hlam import log
 import logging
+from django.core import serializers
 
 # Create your views here.
 day=1
@@ -14,8 +15,6 @@ def start(request):
     global day
     day=1
     filt={'day':day,'Projects':Projects.objects.filter(auth=request.user)}
-    tasks=Tasks.objects.filter(project__auth=request.user).filter(status=False).filter(pub_date__gt=datetime.now())   # Статус false означает что задание еще не выполненно
-    a=datetime.now()
 
     return render(request,'apka/todo.html',filt)
 
@@ -32,13 +31,15 @@ def projects(request):
 
 
 def tasks(request):
-
     id_project=request.POST.get('id_projects') or None
     if request.POST.get('day'):
         global day
         day=int(request.POST.get('day'))
-
+    logging.debug('-1')
     tasks = Tasks.objects.filter(project__auth=request.user).filter(status=False)  # Статус false означает что задание еще не выполненно
+
+    f=tasks.filter(pub_date__gt=datetime.now())
+
     if id_project is not None:                                                     # Выборка по конкретному проекту, если он есть
         tasks=tasks.filter(project=id_project)
     else:
@@ -48,10 +49,13 @@ def tasks(request):
                                          # Сортировка находится в ordering
     later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
     tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
-
-
-
-    return render(request, 'apka/todo/tasks.html', {'Later':later,'Tasks':tasks})
+    #обновление количества для фильтров  Обновление находится здеть, так как каждое изменение количества записей будет открывать этот метод
+    filt={}
+    a=datetime.now()
+    filt['today']=len(f.filter(pub_date__lt=datetime.date(a+timedelta(days=1))))
+    filt['seven']=len(f.filter(pub_date__lt=datetime.date(a+timedelta(days=7))))
+    filt['all']=len(f)
+    return render(request, 'apka/todo/tasks.html', {'Later':later,'Tasks':tasks,'filt':filt})
 
 @log
 def identificator(request):
@@ -106,6 +110,12 @@ def del_pr(request):
         return HttpResponse('0')
     p.delete()
     return HttpResponse('1')
+
+
+def upd_select(request):
+    p=Projects.objects.filter(auth=request.user)
+    return HttpResponse(serializers.serialize('json', list(p), fields=('name','id')))
+
 
 logging.basicConfig(
 	level = logging.DEBUG,
