@@ -47,7 +47,7 @@ def tasks(request,archive=False):
         if day:
             tasks = tasks.filter(pub_date__lt=datetime.date(datetime.now()+timedelta(days=day)))
 
-     if not archive:
+    if not archive:
         later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
         tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
     #обновление количества для фильтров  Обновление находится здеть, так как каждое изменение количества записей будет открывать этот метод
