@@ -21,13 +21,16 @@ if (String(window.location.href).includes('archive')){
 $(window).resize(function(){
   icone('#wrap');
 });
- $('input,textarea,select').focus(function(){
+ $('input,textarea,select').mousedown(function(event){
+        var self=$(this);
+        event.preventDefault()
         $('body').css({
                 'min-width':$(document).width()+'px',
                 'min-height':$(document).height()+'px'
         });
+        setTimeout(function (){self.focus()},200);
  });
-  $('input,textarea,select').blur(function(){
+  $('input,textarea,select').blur(function(event){
         $('body').css({
                 'min-width':'inherit',
                 'min-height':'inherit'
