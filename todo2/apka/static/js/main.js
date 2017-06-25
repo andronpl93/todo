@@ -21,3 +21,15 @@ if (String(window.location.href).includes('archive')){
 $(window).resize(function(){
   icone('#wrap');
 });
+ $('input').focus(function(){
+        $('body').css({
+                'min-width':$(document).width()+'px',
+                'min-height':$(document).height()+'px'
+        });
+ });
+  $('input').blur(function(){
+        $('body').css({
+                'min-width':'inherit',
+                'min-height':'inherit'
+        });
+ });
