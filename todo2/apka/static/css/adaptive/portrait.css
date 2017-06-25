@@ -25,7 +25,8 @@
 }
 #error_box{
         font-size:25px;
-        left:10%;
+        left:15%;
+        top:15%;
         width:80%;
     }
 @media  (max-aspect-ratio: 999/1000) { /*0.999*/
@@ -56,11 +57,7 @@
     .project .menu{
         right:-15%;
     }
-    #error_box{
-        font-size:25px;
-        left:20%;
-        top:40%;
-    }
+
 }
 @media  (max-aspect-ratio: 8/10) {
      #centr,#left{
@@ -68,11 +65,6 @@
     }
     #left{
         margin-top:7%;
-    }
-    #error_box{
-        font-size:30px;
-        left:20%;
-        top:40%;
     }
 
 
@@ -92,11 +84,7 @@
     #left.active{
         margin-left:33%;
     }
-    #error_box{
-        font-size:35px;
-        left:20%;
-        top:40%;
-    }
+
     .project .menu{
         right:-10%;
       background-size: 15px 70px;
@@ -104,10 +92,7 @@
     .tasks .icon,.project>div .icon,#add_project .icon{
         height:55px;
     }
-    #error_box{
-        font-size:45px;
-        top:10%;
-    }
+
 
     #long  span{
             height:13%;
