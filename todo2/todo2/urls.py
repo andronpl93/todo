@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^odmen/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^', include('apka.urls')),
-    url(r'^archive/?', include('apka.urls'),{'archive':True}),
+    url(r'^archive/', include('apka.urls'),{'archive':True}),
 ]

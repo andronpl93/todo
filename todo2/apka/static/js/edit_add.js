@@ -33,7 +33,7 @@ $('#centr').on('click',function(e){
     if (($(e.target).hasClass('menu_esc')))////  закатывает меню обратно
     {
         e.stopPropagation();
-        menu_esc($(e.target),{'fF':fadeForm_pr,'contId':'#add_project','cont':'.project'});
+        menu_esc($(e.target),{'fF':fadeForm,'contId':'#add_project','cont':'.project'});
     }
 
     if (($(e.target).hasClass('menu_edit')))   // Кнопка "изменить запись". Подтягивает форму для изменения. Отправлять форму будет кнопка на самой форме
@@ -46,7 +46,7 @@ $('#centr').on('click',function(e){
             form.show();
             $('.taskName',self.parents('.tasks')).hide();
             //приоритет
-            $('input[name=priority][value='+$('.priority',head).attr('data-prior')+"]").attr('checked','checked');
+            $('input[name=priority][value='+$('.priority',head).attr('data-prior')+"]").prop('checked',true);
             //Проект
             $('option[value='+$('.projectName',head).attr('data-proj')+']',form).attr('selected','selected');
             $('#add_name',form).val($('.taskName',head.parents('.tasks')).text());
@@ -149,7 +149,7 @@ $('#add_project .icon').click(function(){
 
 
 function fadeForm(self){
-    $('input[name=priority]:checked').removeAttr("checked");$('#add_name').val('');$('#add_datetime').val('');
+    $('input[name=priority]:checked').prop('checked',false);$('#add_name').val('');$('#add_datetime').val('');
     self.parents('#add_task').removeAttr('data-id').fadeOut(100);
     $('div:last-child',self.parents('.add')).fadeIn(100);
     $('.taskName',self.parents('.tasks')).show();
@@ -163,6 +163,8 @@ function fadeForm_pr(self){
     $('div:last-child',self.parents('.add')).fadeIn(100);
     $('>div:first-child',self.parents('.project')).css('visibility','visible');
     $('#add_project').appendTo('body');
+    $('#icon_panel').hide();
+
 };
 
 function add_form(){
