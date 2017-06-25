@@ -1,3 +1,9 @@
+html, body, h1, h2, h3, h4, h5, h6, div, p, a, img, table, thead, tbody, th, td, dl, ul, ol, li, dt, dd, form, fieldset, label, button, hr 	{margin: 0; padding: 0; border: 0; font-weight: normal;}
+ol, ul		{list-style: none;}
+a img		{border: none;}
+:focus 		{outline: 0;}
+
+
 html,header p,body,#wrap{
     padding:0;
     margin:0;
@@ -10,7 +16,7 @@ body > header{
     height: 10vh;
     margin:0;
     position: relative;
-    z-index: 10;
+    z-index: 100;
     display:flex;
     justify-content: space-between;
     align-items:center;
@@ -25,6 +31,8 @@ a{
 body > header p{
     font-size: 300%;
     margin-left: 5%;
+    overflov:hodden;
+    width:13%;
     color:#CFFCFF;
     text-shadow: 0 -1px 0 #82DFF1,
                0 -2px 0 #66CDE2,
@@ -55,7 +63,7 @@ body > header p{
 }
 
 #archive{
-    margin-right: -63vw;
+    margin-right: -63%;
     opacity: 0.6;
     transition: all 0.5s ease;
 }

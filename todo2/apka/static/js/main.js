@@ -18,3 +18,6 @@ if (String(window.location.href).includes('archive')){
      $('#archive').addClass('active');
 }
 
+$(window).resize(function(){
+  icone('#wrap');
+});

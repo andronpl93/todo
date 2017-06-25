@@ -23,7 +23,7 @@ $('.filter').bind('click',function(){ //:not(.active) почему-то не о�
 });
 
 $('.panel> div').on('click','.project>div:first-child',function(e){
-    e.stopPropagation();
+
     $('.filter.active').removeClass('active');
 
     if(event.target.className=='menu')          //раскошные костыли
@@ -37,7 +37,7 @@ $('.panel> div').on('click','.project>div:first-child',function(e){
     }
 
     get_content();
-
+    $('#left').toggleClass('active');
 });
 function load_projects(){
 $.get( "shuban-projects/", function( data ) {
@@ -86,7 +86,7 @@ function get_content(){
 }
 
 function icone(context){
-    var h,numIcon,sizeIcon=parseInt($('.icon:first',context).css('height'));
+    var h,numIcon,sizeIcon=parseInt($('.icon:first',context).innerHeight());
     $('.icon',context).each(function(){
             numIcon=$(this).attr('data-num');
             $(this).css({

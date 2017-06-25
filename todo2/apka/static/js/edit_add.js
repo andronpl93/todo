@@ -98,6 +98,7 @@ $('#left').on('click',function(e){
             form.attr('data-id',self.parents('.project').attr('data-id'));
             icone('.project');
             $('#add_name_pr').val( $('.name',self.parents('.project')).text());
+            self.parent('.menu_act').css('height',$('.name',self.parents('.project')).innerHeight()+"px");
 
         })($(e.target));
     }
@@ -125,6 +126,7 @@ $('#left').on('click',function(e){
 });
 
 $('#add_project .icon').click(function(){
+
         p=$('#icon_panel');
         wL=$('#left').width();
         $('#icon_panel .shadow').css({'width':wL/6+'px','height':wL/6+'px'});
@@ -157,7 +159,7 @@ function fadeForm(self){
 };
 
 function fadeForm_pr(self){
-    $('#add_name_pr').val('');$('#add_project .icon').attr('data-num','1');
+    $('#add_name_pr').val('');$('#add_project .icon').attr('data-num','2');
     icone('.project');
     self.parents('#add_project').removeAttr('data-id').fadeOut(100);
     $('div:last-child',self.parents('.add')).fadeIn(100);
@@ -219,7 +221,7 @@ function hideBottom(e){
     esc({'data':{'fF':fadeForm_pr,'cont':'.project','self':$('#add_project  .esc')},'stopPropagation':function(){}});
     var self=$(this).parent('.add');
     $('div:last-child',self).fadeOut(function(){
-        $(e.data.sel).prependTo(self).fadeIn(300);
+        $(e.data.sel).prependTo(self).fadeIn(150);
     });
     e.data.update();
 };
@@ -249,19 +251,24 @@ function end (e){///   кнопка "Готово" на форме добавл�
 
 function esc(e){//// прячет форму
      e.stopPropagation();
+      $('.menu',e.data.self.parents('.project')).css('height',$('.name',e.data.self.parents('.project')).innerHeight()+"px");
      e.data.fF(e.data.self);
      $('.menu.menu_act').removeClass('menu_act');
+
+
 }
 
 function men(self,e){
     $('.menu.menu_act').removeClass('menu_act');
     e.fF($(e.contId+' .esc'));
     self.addClass('menu_act');
+
 };
 function menu_esc(self,e){
     self.parents('.menu').removeClass('menu_act');
     e.fF($(e.contId+' .esc'));
     $('.menu',$(e.contId).parents(e.cont)).removeClass('menu_act');
+    self.parent('.menu').css('height',$('.name',self.parents('.project')).innerHeight()+"px");
 };
 
 function upd_select(){

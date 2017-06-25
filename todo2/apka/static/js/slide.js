@@ -12,8 +12,10 @@ $('#centr').on('click','.check',function(){
 		    a=data=="True" && 'line-through' || 'None';
 		    $('.taskName',self.parents('.tasks')).css('text-decoration',a);
 		    loader.fadeOut(200);
-		    load_projects();
-		    load_content();
+
+		    setTimeout(function(){              //чтобы сначала ползунок заполз, а только потом прячется блок
+		                load_projects();
+		                load_content();},500);
 		},
     };
     $.ajax(obj);
