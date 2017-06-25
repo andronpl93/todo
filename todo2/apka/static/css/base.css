@@ -20,7 +20,7 @@ body > header{
 }
 a{
     text-decoration: none;
-    color:#CFFCFF;
+    color:inherit;
 }
 body > header p{
     font-size: 300%;
@@ -51,7 +51,7 @@ body > header p{
 
                0 0 5px rgba(0,0,0,.5),
                0 1px 3px rgba(0,0,0,.8),
-               0 3px 5px rgba(0,0,0,0.3)
+               0 3px 5px rgba(0,0,0,0.3);
 }
 
 #archive{
@@ -59,8 +59,31 @@ body > header p{
     opacity: 0.6;
     transition: all 0.5s ease;
 }
-#archive:hover,#archive.active{
+#archive:hover{
         opacity: 1;
+
+}
+span#archive.active
+{
+    opacity: 1;
+    animation: shad3 3s infinite ease-in-out;
+}
+
+@keyframes shad3 {
+  0% {   text-shadow:
+
+               0 0 5px rgba(0,0,0,.5),
+               0 1px 3px rgba(0,0,0,.8),
+               0 3px 5px rgba(0,0,0,0.3);}
+  50%{   text-shadow:
+
+               0 0 10px rgba(0,0,0,1),
+               0 1px 10px rgba(0,0,0,1),
+               0 3px 25px rgba(0,0,0,1);}
+  100%{   text-shadow:
+               0 0 5px rgba(0,0,0,.5),
+               0 1px 3px rgba(0,0,0,.8),
+               0 3px 5px rgba(0,0,0,0.3);}
 }
 
 #wrap{

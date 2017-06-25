@@ -21,7 +21,6 @@ def start(request,archive=False):
 
 def projects(request,archive=False):
     pr=[]
-    logging.debug(archive)
     for i in Projects.objects.filter(auth=request.user):
         pr.append({})
         pr[-1]['id']=i.id
