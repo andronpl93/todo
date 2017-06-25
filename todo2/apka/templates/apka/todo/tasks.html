@@ -1,9 +1,8 @@
 {% load staticfiles %}
+
 {%for l in Later%}
-    {%if forloop.first%}
-
+    {%if forloop.first and not archive%}
         <span>У Вас есть просроченные задания! Очень надеемся, что вы просто забыли их отметить </span>
-
     {%endif%}
     <div class="tasks later " data-id="{{l.id}}">
         <header>

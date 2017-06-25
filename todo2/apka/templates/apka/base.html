@@ -53,7 +53,7 @@
                     <div class="cssload-tetromino cssload-box4"></div>
             </div>
                 </div>
-
+                {%if not archive%}
                 <div id="add_task" data-id>
 
                     <label>Приоритет: <label><input type="radio" name="priority" value='a'/> Высокий </label><label><input name="priority" type="radio" value='b'/> Средний </label><label><input name="priority" type="radio" value='c'/> Низкий</label></label><br/>
@@ -66,7 +66,7 @@
                     <input  id="add_datetime" placeholder="Время до выполнения"/><br/>
                      <span class="esc">Отмена</span><span class="end"> Готово</span>
                 </div>
-
+                {%endif%}
 
     <div id='error_box' style='display: none;color:black; background: rgba(132,182,222,0.95); position: fixed;z-index:100; width: 40%; left:36%; top: 40%; -webkit-box-shadow: 2px 5px 5px 3px rgba(0, 0, 0, 0.7); box-shadow: 3px 5px 15px 3px rgba(0, 0, 0, 0.7); -webkit-border-radius: 5px; border-radius: 5px; text-align: center;'>
 

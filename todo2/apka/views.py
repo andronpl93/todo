@@ -15,7 +15,7 @@ def start(request,archive=False):
     global day
     day=1
     filt={'day':day,'Projects':Projects.objects.filter(auth=request.user)}
-
+    filt['archive']=archive
     return render(request,'apka/todo.html',filt)
 
 
@@ -27,7 +27,7 @@ def projects(request,archive=False):
         pr[-1]['img']=i.img
         pr[-1]['name']=i.name
         pr[-1]['taskCount']=i.tasks_set.filter(status=archive).count()  #не делать p.tasks_set.count в шаблоне,так как нужен этот фильтр
-    return render(request, 'apka/todo/project.html',{'projects':pr})
+    return render(request, 'apka/todo/project.html',{'projects':pr,'archive':archive})
 
 
 def tasks(request,archive=False):
@@ -47,16 +47,15 @@ def tasks(request,archive=False):
         if day:
             tasks = tasks.filter(pub_date__lt=datetime.date(datetime.now()+timedelta(days=day)))
 
-    if not archive:
-        later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
-        tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
+    later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
+    tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
     #обновление количества для фильтров  Обновление находится здеть, так как каждое изменение количества записей будет открывать этот метод
     filt={}
     a=datetime.now()
     filt['today']=len(f.filter(pub_date__lt=datetime.date(a+timedelta(days=1))))
     filt['seven']=len(f.filter(pub_date__lt=datetime.date(a+timedelta(days=7))))
     filt['all']=len(f)
-    return render(request, 'apka/todo/tasks.html', {'Later':later,'Tasks':tasks,'filt':filt})
+    return render(request, 'apka/todo/tasks.html', {'Later':later,'Tasks':tasks,'filt':filt,'archive':archive})
 
 @log
 def identificator(request,archive=False):
@@ -98,7 +97,6 @@ def add_pr(request,archive=False):
         p=Projects.objects.get(id=int(a('id_project')), auth=request.user)
         p.name=a('name')
         p.img=a('img')
-        logging.debug('111111')
     else:
         p=Projects(name=a('name'),img=a('img'),auth=request.user)
     p.save()

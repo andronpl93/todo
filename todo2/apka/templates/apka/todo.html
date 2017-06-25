@@ -19,11 +19,13 @@
         </header>
         <p>Проекты:</p>
         <div></div>
-        <div class="add">
-            <div>
-                <img src="{% static 'img/add.gif' %}">  <p>Добавить проект</p>
+        {%if not archive%}
+            <div class="add">
+                <div>
+                    <img src="{% static 'img/add.gif' %}">  <p>Добавить проект</p>
+                </div>
             </div>
-        </div>
+        {%endif%}
         <div id="add_project" data-id>
              <div>
                  <div class="icon" data-num="2"><div id="icon_panel"></div></div>
@@ -35,11 +37,13 @@
 
     <div id="centr">
         <div></div>
-        <div class="add">
-            <div>
-                <img src="{% static 'img/add.gif' %}"> <p>Добавить задание</p>
+        {%if not archive%}
+            <div class="add">
+                <div>
+                    <img src="{% static 'img/add.gif' %}"> <p>Добавить задание</p>
+                </div>
             </div>
-        </div>
+        {%endif%}
     </div>
 
 
