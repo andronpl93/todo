@@ -21,13 +21,13 @@ if (String(window.location.href).includes('archive')){
 $(window).resize(function(){
   icone('#wrap');
 });
- $('input').focus(function(){
+ $('input,textarea,select').focus(function(){
         $('body').css({
                 'min-width':$(document).width()+'px',
                 'min-height':$(document).height()+'px'
         });
  });
-  $('input,textarea').blur(function(){
+  $('input,textarea,select').blur(function(){
         $('body').css({
                 'min-width':'inherit',
                 'min-height':'inherit'
