@@ -33,7 +33,7 @@ $('#centr').on('click',function(e){
     if (($(e.target).hasClass('menu_esc')))////  закатывает меню обратно
     {
         e.stopPropagation();
-        menu_esc($(e.target),{'fF':fadeForm,'contId':'#add_project','cont':'.project'});
+        menu_esc($(e.target),{'fF':fadeForm,'contId':'#add_task','cont':'.tasks'});
     }
 
     if (($(e.target).hasClass('menu_edit')))   // Кнопка "изменить запись". Подтягивает форму для изменения. Отправлять форму будет кнопка на самой форме
