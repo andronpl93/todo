@@ -3,4 +3,4 @@ __pycache__
 myvenv
 db.sqlite3
 .DS_Store
-krok/settings.py
+todo2/settings.py
