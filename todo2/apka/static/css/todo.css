@@ -2,7 +2,7 @@
 #centr{
 
     width: 50%;
-    min-height: 100vh;
+    min-height: 300px;
 }
 #left{
     position: relative;
@@ -10,7 +10,7 @@
 .panel{
 
     width: 25%;
-    min-height: 100vh;
+    min-height: 300px;
     padding: 0 4% 0;
     overflow: hidden;
 }
