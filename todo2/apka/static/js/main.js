@@ -27,7 +27,7 @@ $(window).resize(function(){
                 'min-height':$(document).height()+'px'
         });
  });
-  $('input').blur(function(){
+  $('input,textarea').blur(function(){
         $('body').css({
                 'min-width':'inherit',
                 'min-height':'inherit'

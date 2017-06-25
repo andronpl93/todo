@@ -7,7 +7,7 @@
     top:0%;
     width:30%;
     padding:10% 5% 0 50%;
-    box-shadow:50px 5px 50px rgba(0,0,0,0.5);
+    box-shadow:55px 30px 50px rgba(0,0,0,0.5);
     background-color:#EFEFEF;
     z-index:11;
     transition: all 0.8s ease;
@@ -29,6 +29,8 @@
         top:15%;
         width:80%;
     }
+
+
 @media  (max-aspect-ratio: 999/1000) { /*0.999*/
     #centr{
         width: 80%;
@@ -57,7 +59,9 @@
     .project .menu{
         right:-15%;
     }
-
+    body > header{
+            padding:1% 0;
+    }
 }
 @media  (max-aspect-ratio: 8/10) {
      #centr,#left{
@@ -66,7 +70,9 @@
     #left{
         margin-top:7%;
     }
-
+    body > header{
+            padding:3% 0;
+    }
 
 }
 @media  (max-aspect-ratio: 6/10) {
@@ -106,5 +112,8 @@
 
     #long  span{
             height:10%;
+    }
+    body > header{
+            padding:5% 0;
     }
 }

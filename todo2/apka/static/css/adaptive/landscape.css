@@ -20,6 +20,9 @@
                 width: 50%;
 
         }
+        body > header{
+            padding:1% 0;
+        }
    }
    @media  (min-aspect-ratio: 11/10) { /*1.1*/
        .panel{
@@ -36,6 +39,9 @@
         }
         .check label i {
             right:65%;
+        }
+                body > header{
+            padding:1% 0;
         }
    }
 
@@ -56,5 +62,15 @@
             width:20%;
             margin-left: 8%;
         }
+       body > header{
+            padding:0.5% 0;
+       }
    }
 
+   @media  (min-aspect-ratio: 2/1) {
+
+          body > header{
+            padding:00;
+       }
+
+   }
