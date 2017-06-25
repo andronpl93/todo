@@ -21,14 +21,14 @@ if (String(window.location.href).includes('archive')){
 $(window).resize(function(){
   icone('#wrap');
 });
- $('input,textarea,select').mousedown(function(event){
+ $('input,textarea,select').bind('touchstart mousedown',function(event){
         var self=$(this);
         event.preventDefault()
         $('body').css({
                 'min-width':$(document).width()+'px',
                 'min-height':$(document).height()+'px'
         });
-        setTimeout(function (){self.focus()},200);
+        setTimeout(function (){self.focus()},40);
  });
   $('input,textarea,select').blur(function(event){
         $('body').css({
