@@ -33,7 +33,7 @@ section div{
     justify-content: space-between;
 }
 
-a{
+.in a{
     display: block;
     width: 23%;
     overflow: hidden;

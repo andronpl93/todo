@@ -68,3 +68,7 @@ body > header p{
     display:flex;
     justify-content: left;
 }
+
+#add_task{
+    display: none;
+}

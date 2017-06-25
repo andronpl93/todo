@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.db.models import Count
 from datetime import datetime, timedelta
 from .models import Projects,Tasks
-from .hlam import log
+from apka.hlam import log
 import logging
 from django.core import serializers
 
