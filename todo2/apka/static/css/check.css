@@ -1,7 +1,7 @@
 #long{
     display:block;
     float:right;
-    height:80%;
+    height:100%;
     width:25%;
     margin-top:2%;
     position: relative;
@@ -13,7 +13,8 @@
 #long  span{
     float: left;
     width:100%;
-    height:18%;
+    min-height:8px;
+    max-height:18px;
     margin:6% 0;
     background-color:#CFFCFF;
     display:block;
