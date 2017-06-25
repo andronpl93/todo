@@ -31,11 +31,12 @@ def projects(request,archive=False):
 
 
 def tasks(request,archive=False):
+    # Сортировка находится в ordering
     id_project=request.POST.get('id_projects') or None
     if request.POST.get('day'):
         global day
         day=int(request.POST.get('day'))
-    logging.debug('-1')
+
     tasks = Tasks.objects.filter(project__auth=request.user).filter(status=archive)  # Статус false означает что задание еще не выполненно
 
     f=tasks.filter(pub_date__gt=datetime.now())
@@ -46,9 +47,9 @@ def tasks(request,archive=False):
         if day:
             tasks = tasks.filter(pub_date__lt=datetime.date(datetime.now()+timedelta(days=day)))
 
-                                         # Сортировка находится в ordering
-    later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
-    tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
+     if not archive:
+        later=tasks.filter(pub_date__lt=datetime.now())   #Просроченные задания
+        tasks = tasks.filter(pub_date__gt=datetime.now())         #не просроченные задания
     #обновление количества для фильтров  Обновление находится здеть, так как каждое изменение количества записей будет открывать этот метод
     filt={}
     a=datetime.now()
