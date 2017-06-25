@@ -8,8 +8,8 @@ var obj={
 var loader=$('#preloader');
 
 ///Прячет кнопку "добавить",выкатывает форму
-$('#centr .add div').click({'sel':'#add_task'},hideBottom);   // для задания
-$('#left .add div').click({'sel':'#add_project'},hideBottom);   // для прокта
+$('#centr .add div').click({'sel':'#add_task','update':upd_select},hideBottom);   // для задания
+$('#left .add div').click({'sel':'#add_project','update':function(){}},hideBottom);   // для прокта
 
 ////Кнопка Готово
 $('#add_task  .end').click({'url':'shuban-add/','func':add_form,'cont':'.task','fF':fadeForm,'text': 'Задание успешно ','add':'добавленно','edit':'измененно'},end);
@@ -29,11 +29,13 @@ $('#centr').on('click',function(e){
         e.stopPropagation();
         men($(e.target),{'fF':fadeForm,'contId':'#add_task'});
     }
+
     if (($(e.target).hasClass('menu_esc')))////  закатывает меню обратно
     {
         e.stopPropagation();
         menu_esc($(e.target),{'fF':fadeForm_pr,'contId':'#add_project','cont':'.project'});
     }
+
     if (($(e.target).hasClass('menu_edit')))   // Кнопка "изменить запись". Подтягивает форму для изменения. Отправлять форму будет кнопка на самой форме
     {
         e.stopPropagation();
@@ -52,6 +54,7 @@ $('#centr').on('click',function(e){
             form.attr('data-id',head.parent('.tasks').attr('data-id'));
         })($(e.target));
     }
+
     if (($(e.target).hasClass('menu_del')))
     {
          e.stopPropagation();
@@ -76,11 +79,13 @@ $('#left').on('click',function(e){
         e.stopPropagation();
         men($(e.target),{'fF':fadeForm_pr,'contId':'#add_project'});
     }
+
     if (($(e.target).hasClass('menu_esc')))////  закатывает меню обратно
     {
         e.stopPropagation();
         menu_esc($(e.target),{'fF':fadeForm_pr,'contId':'#add_project','cont':'.project'});
     }
+
     if (($(e.target).hasClass('menu_edit')))   // Кнопка "изменить запись". Подтягивает форму для изменения. Отправлять форму будет кнопка на самой форме
     {
         e.stopPropagation();
@@ -96,6 +101,7 @@ $('#left').on('click',function(e){
 
         })($(e.target));
     }
+
     if (($(e.target).hasClass('menu_del')))
     {
          e.stopPropagation();
@@ -213,7 +219,7 @@ function hideBottom(e){
     $('div:last-child',self).fadeOut(function(){
         $(e.data.sel).prependTo(self).fadeIn(300);
     });
-    upd_select();
+    e.data.update();
 };
 function end (e){///   кнопка "Готово" на форме добавления-изменения
     e.stopPropagation();
@@ -264,6 +270,8 @@ function upd_select(){
             for (var i in  data){
                 text+='<option value="'+data[i].pk+'">'+data[i].fields.name+'</option>';
             }
+            if(!data.length)
+                massage('Задания являются частью проета, для начала работы необходимо создать проект',3500);
             sel.html(text);
 });
 
